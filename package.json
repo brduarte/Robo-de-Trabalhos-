@@ -12,7 +12,9 @@
   "dependencies": {
     "algorithmia": "^0.3.10",
     "axios": "^0.19.0",
+    "cli-progress": "^3.3.1",
     "fs": "0.0.1-security",
+    "inquirer": "^7.0.0",
     "mediawiki": "0.0.14",
     "pdfkit": "^0.10.0",
     "readline-sync": "^1.4.10",

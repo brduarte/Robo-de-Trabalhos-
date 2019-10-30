@@ -1,20 +1,43 @@
-readline = require('readline-sync');
+const inquirer = require('inquirer');
 
-function entradasDoUsuario(content) {
-    
-    content.argumentoBusca = inputText();
-    content.prefixoSelecionado = inputPrefix();
 
-    function inputText() {
-        return readline.question('Digite um termo do Wikipedia: ');
+async function entradasDoUsuario(content) {
+
+    const prompt = inquirer.createPromptModule();
+
+    content.argumentoBusca = await inputText('Qual é o tema do trabalho?');
+
+    content.prefixoSelecionado = await inputList('Selecione uma opção para ajudar na busca:',[
+        'O que é?',
+        'Quem é?',
+        'A História de ...'
+    ]);
+
+    async function inputText(label) {
+
+        const response = await prompt({
+            type: 'input',
+            name: 'value',
+            message: label
+        });
+
+        return response.value;
+
     }
 
-    function inputPrefix(content) {
-        const prefixs = ['Quem e', 'O que e', 'A historia de'];
-        const prefixSelecionado = readline.keyInSelect(prefixs);
-        const textoPrefix = prefixs[prefixSelecionado];
-        return textoPrefix;
+    async function inputList(label ,options = []) {
+
+        const response = await prompt({
+            type: 'list',
+            name: 'value',
+            message: label,
+            choices: options
+        });
+
+        return response.value;
+
     }
+
 
 }
 

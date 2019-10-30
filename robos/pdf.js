@@ -1,13 +1,17 @@
 const pdf = require('pdfkit');
 const fs = require('fs');
+const util = {
+    barraProgresso: require('../Util/BarraDeProgresso'),
+};
 
 function robo(content) {
 
+    util.barraProgresso();
     gerarPdf(content);
 
     function gerarPdf(content) {
 
-        const doc = new pdf({
+        doc = new pdf({
             autoFirstPage: false
         });
 
@@ -43,7 +47,7 @@ function robo(content) {
 
 
         const conteudo = doc.addPage();
-        conteudo.text(content.conteudoOriginal,{
+        conteudo.text(content.conteudoOriginal, {
             align: 'justify'
         });
 

@@ -1,24 +1,34 @@
-var algorithmia = require("algorithmia");
+const algorithmia = require("algorithmia");
+const {apiKey, wikipedia} = require('../config').algorithmia;
 
 
 async function robo(content) {
 
-    await buscarTextoWikipedia(content)
+    await buscarTextoWikipedia(content);
 
     async function buscarTextoWikipedia(content) {
 
+        try {
+
+            console.log('Buscando informações para montar a pesquisa...');
+
             const input = {
                 "articleName": content.argumentoBusca,
-                "lang": 'pt'
-            }
+                "lang": 'pt',
+            };
 
-            const client = await algorithmia("simnay8M5FJuv/pIQJ44uNb3D4/1");
-            const algoritimoWikipedia = await client.algo('web/WikipediaParser/0.1.2');
-            const wikipediaResponse = await algoritimoWikipedia.pipe(input)
-            
-            content.conteudoOriginal = await wikipediaResponse.get().content
+            const client = await algorithmia(apiKey);
+            const algoritimoWikipedia = await client.algo(wikipedia);
+            const wikipediaResponse = await algoritimoWikipedia.pipe(input);
 
-       
+            const response = await wikipediaResponse.get();
+
+            content.conteudoOriginal = response.content;
+
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
 }
