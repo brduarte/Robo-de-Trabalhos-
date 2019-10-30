@@ -32,15 +32,19 @@ function robo(content) {
         capa.moveDown(3);
         capa.text('NOME DO AUTOR', {
             align: 'center',
-            style:'bold'
-        })
+        });
         capa.moveDown(4);
         capa.text('TÍTULO DO TRABALHO', {
             align: 'center',
-            fontStyle: 'Time-Bold'
         });
         capa.text('SUBTITULO', {
             align: 'center'
+        });
+
+
+        const conteudo = doc.addPage();
+        conteudo.text(content.conteudoOriginal,{
+            align: 'justify'
         });
 
 
