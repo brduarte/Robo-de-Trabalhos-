@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 
-
 async function entradasDoUsuario(content) {
 
     const prompt = inquirer.createPromptModule();
@@ -37,7 +36,6 @@ async function entradasDoUsuario(content) {
         return response.value;
 
     }
-
 
 }
 

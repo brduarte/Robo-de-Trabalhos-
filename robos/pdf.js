@@ -45,12 +45,10 @@ function robo(content) {
             align: 'center'
         });
 
-
         const conteudo = doc.addPage();
         conteudo.text(content.conteudoOriginal, {
             align: 'justify'
         });
-
 
         // Finaliza PDF
         doc.end();
